@@ -34,8 +34,8 @@ class App {
     }
 
     load_router() {
-        this.app.use("/", this.appRouter);
-        this.appRouter.use("/", dictionary_controller);
+        this.app.use("/api/v1", this.appRouter);
+        this.appRouter.use("/dictionary", dictionary_controller);
     }
 
     listen(): void {
