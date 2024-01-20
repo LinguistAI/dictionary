@@ -24,13 +24,6 @@ export class Exception extends Error {
     }
 }
 
-export class UserNotFoundExc extends Exception {
-    constructor(error?: string) {
-        let err: string = error || "No matching id";
-        super(StatusCodes.BAD_REQUEST, "User not found", err);
-    }
-}
-
 export class InvalidRequestBodyExc extends Exception {
     constructor(error: string) {
         super(StatusCodes.BAD_REQUEST, "Invalid request content", error);
@@ -77,5 +70,16 @@ export class NoPermissionExc extends Exception {
     constructor(error?: any) {
         let err: string = error || "No permission";
         super(StatusCodes.UNAUTHORIZED, "Unauthorized", err);
+    }
+}
+
+export class ConfigNotLoadedExc extends Exception {
+    constructor(error?: any) {
+        let err: string = error || "Configs not loaded";
+        super(
+            StatusCodes.INTERNAL_SERVER_ERROR,
+            "Configs are not loaded properly",
+            err
+        );
     }
 }

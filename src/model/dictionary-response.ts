@@ -1,5 +1,12 @@
 export interface DictionaryResponse {
-    // TODO: to be updated according to the api
+    id: string; // api response -> meta -> id
     word: string;
-    meaning: string;
+    audio: string; // 2.6 PRONUNCIATIONS: PRS in documentation
+    func_label: string; // verb, noun, adjective, etc.
+    meaning: WordDef[];
+}
+
+export interface WordDef {
+    definition: string;
+    examples?: string[];
 }
