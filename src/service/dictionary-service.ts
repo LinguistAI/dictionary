@@ -1,39 +1,36 @@
 import { DictionaryResponse, WordDef } from "../model/dictionary-response";
+import { Router, Request, Response, NextFunction } from "express";
 import { AxiosExc, WordNotFoundExc } from "../common/exception";
 import config from "../config/config";
 import { WordSearchParams } from "../common/search-word-params";
 import axios from "axios";
 
 export class DictionaryService {
-    // search_word(
-    //     word: string
-    // ): Promise<DictionaryResponse[] | DictionaryResponse> {
-    //     return new Promise<DictionaryResponse[] | DictionaryResponse>(
-    //         (resolve, reject) => {
-    //             this.get_word_by_name(word)
-    //                 .then((dict: DictionaryResponse[]) => {
-    //                     resolve(dict);
-    //                 })
-    //                 .catch((err) => {
-    //                     reject(err);
-    //                 });
-    //         }
-    //     );
-    // }
+    // this one does not work properly -> proposal: fe sends request to these url
+    get_auido_file(filename: string): Promise<any> {
+        return new Promise<any>((resolve, reject) => {
+            const axios_config = {
+                method: "get",
+                url: "https://media.merriam-webster.com/audio/prons/en/us/mp3/p/pajama02.mp3",
+            };
 
-    // get_dummy(word: string): Promise<DictionaryResponse> {
-    //     return new Promise<DictionaryResponse>((resolve, reject) => {
-    //         if (word.charAt(0) === word.charAt(0).toUpperCase()) {
-    //             reject(new WordNotFoundExc(`${word} starts with upper case!`));
-    //         } else {
-    //             const dictionary: DictionaryResponse = {
-    //                 word: word,
-    //                 meaning: "good word",
-    //             };
-    //             resolve(dictionary);
-    //         }
-    //     });
-    // }
+            axios(axios_config)
+                .then((res) => {
+                    if (res.status != 200) {
+                        reject(new AxiosExc());
+                    } else if (Object.keys(res.data).length === 0) {
+                        reject(new WordNotFoundExc());
+                    } else {
+                        console.log("in the service");
+                        resolve(Buffer.from(res.data, "binary"));
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                    reject(err);
+                });
+        });
+    }
 
     search_word(
         word: string
@@ -60,64 +57,62 @@ export class DictionaryService {
                             const dict_response = JSON.parse(
                                 JSON.stringify(res.data)
                             );
-
-                            let results: DictionaryResponse[] = [];
-
-                            console.log(dict_response);
-                            for (
-                                let i: number = 0;
-                                i < dict_response.length;
-                                i++
-                            ) {
-                                if (
-                                    dict_response[i].meta.id !=
-                                    `${word}:${i + 1}`
-                                ) {
-                                    break;
-                                }
-
-                                let meanings: WordDef[] = [];
-                                for (
-                                    let j: number = 0;
-                                    j < dict_response[i].def.sseq.length;
-                                    j++
-                                ) {
-                                    const def: WordDef = {
-                                        definition:
-                                            dict_response[i].def.sseq[j][0]
-                                                .sense.dt[0][1],
-                                        examples: dict_response[i].def.sseq[
-                                            j
-                                        ][0].sense.dt[1][1].map(
-                                            (item: { t: any }) => item.t
-                                        ),
-                                    };
-
-                                    meanings.push(def);
-                                }
-
-                                const result: DictionaryResponse = {
-                                    id: dict_response[i].meta.id,
-                                    word: word,
-                                    audio: dict_response[i].hwi.prs[0]?.sound
-                                        .audio,
-                                    func_label: dict_response[i].fl,
-                                    meaning: meanings,
-                                };
-
-                                results.push(result);
-                            }
-                            // const dictionary: DictionaryResponse = {
-                            //     word: word,
-                            //     meaning: dict_response.meaning, // TODO update accoridng to api
-                            // };
+                            const results: DictionaryResponse[] = dict_response
+                                .map((entry: any) =>
+                                    this.extract_dict_data(word, entry)
+                                )
+                                .filter(
+                                    (result: DictionaryResponse | null) =>
+                                        result != null
+                                );
                             resolve(results);
                         }
                     })
                     .catch((err) => {
+                        console.log(err);
                         reject(err);
                     });
             }
         );
+    }
+
+    extract_dict_data(
+        word: string,
+        jsonEntry: any
+    ): DictionaryResponse | undefined {
+        const { meta, def, hwi, fl } = jsonEntry;
+        const idPattern: RegExp = new RegExp(`^[${word}:0-9]+$`);
+
+        // if definitions are not of the exact search word, do not process them
+        if (!idPattern.test(meta.id)) {
+            return undefined;
+        }
+
+        // extract the definitions and example usages
+        const definitionArray: WordDef[] = def?.[0]?.sseq?.map(
+            this.extract_def
+        );
+
+        // extract meta id, audio file name, and functional label
+        const result: DictionaryResponse = {
+            id: meta.id,
+            word: word,
+            audio: hwi?.prs?.[0]?.sound?.audio || "",
+            func_label: fl || "",
+            meaning: definitionArray,
+        };
+
+        return result;
+    }
+
+    extract_def(sseq: any): WordDef {
+        const definitionObj: WordDef = {
+            definition: sseq?.[0]?.[1]?.dt?.[0]?.[1] || "",
+            examples:
+                sseq[0]?.[1]?.dt?.[1]?.[1]?.map((def: { t: any }) => def.t) ||
+                [],
+        };
+
+        return definitionObj;
     }
 }

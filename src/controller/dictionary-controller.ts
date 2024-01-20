@@ -20,22 +20,61 @@ class DictionaryController implements BaseRouter {
 
     init_controller() {
         this.router.get("/", this.search_word);
+        this.router.get("/audio", this.get_audio);
     }
+
+    private get_audio = async (
+        req: Request,
+        res: Response,
+        next: NextFunction
+    ) => {
+        const requested_word: string = req.query.filename as string;
+        console.log(requested_word);
+        library_validation.search_schema
+            .validateAsync(requested_word)
+            .then((validated_word) => {
+                console.log(validated_word);
+                this.dictionaryService
+                    .get_auido_file(validated_word)
+                    .then((audioData) => {
+                        log_service.log(
+                            LogStatus.Success,
+                            `search word: ${validated_word}`
+                        );
+
+                        res.setHeader("Content-Type", "audio/mpeg");
+                        res.send(audioData);
+                    })
+                    .catch((err) => {
+                        log_service.log(
+                            LogStatus.Error,
+                            `search word: ${validated_word}`
+                        );
+                        next(err);
+                    });
+            })
+            .catch((err) => {
+                log_service.log(
+                    LogStatus.Error,
+                    `search word: ${requested_word}`
+                );
+                const exc: Exception = new ValidationExc(err);
+                next(exc);
+            });
+    };
 
     private search_word = async (
         req: Request,
         res: Response,
         next: NextFunction
     ) => {
-        // const search_param = {
-        //     word: req.query.word as string,
-        // };
         const requested_word: string = req.query.word as string;
         console.log(requested_word);
         library_validation.search_schema
             .validateAsync(requested_word)
             .then((validated_word) => {
                 console.log(validated_word);
+                res.setHeader;
                 this.dictionaryService
                     .search_word(validated_word)
                     .then((dict) => {
