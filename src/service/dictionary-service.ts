@@ -1,37 +1,10 @@
 import { DictionaryResponse, WordDef } from "../model/dictionary-response";
-import { Router, Request, Response, NextFunction } from "express";
 import { AxiosExc, WordNotFoundExc } from "../common/exception";
 import config from "../config/config";
-import { WordSearchParams } from "../common/search-word-params";
 import axios from "axios";
+import { create_audio_url } from "../utils/audio-file-utils";
 
 export class DictionaryService {
-    // this one does not work properly -> proposal: fe sends request to these url
-    get_auido_file(filename: string): Promise<any> {
-        return new Promise<any>((resolve, reject) => {
-            const axios_config = {
-                method: "get",
-                url: "https://media.merriam-webster.com/audio/prons/en/us/mp3/p/pajama02.mp3",
-            };
-
-            axios(axios_config)
-                .then((res) => {
-                    if (res.status != 200) {
-                        reject(new AxiosExc());
-                    } else if (Object.keys(res.data).length === 0) {
-                        reject(new WordNotFoundExc());
-                    } else {
-                        console.log("in the service");
-                        resolve(Buffer.from(res.data, "binary"));
-                    }
-                })
-                .catch((err) => {
-                    console.log(err);
-                    reject(err);
-                });
-        });
-    }
-
     search_word(
         word: string
     ): Promise<DictionaryResponse | DictionaryResponse[]> {
@@ -53,6 +26,11 @@ export class DictionaryService {
                             reject(new AxiosExc());
                         } else if (Object.keys(res.data).length === 0) {
                             reject(new WordNotFoundExc());
+                        } else if (
+                            Array.isArray(res.data) &&
+                            !res.data.every((item) => typeof item === "object")
+                        ) {
+                            reject(new WordNotFoundExc(res.data));
                         } else {
                             const dict_response = JSON.parse(
                                 JSON.stringify(res.data)
@@ -76,7 +54,7 @@ export class DictionaryService {
         );
     }
 
-    extract_dict_data(
+    private extract_dict_data(
         word: string,
         jsonEntry: any
     ): DictionaryResponse | undefined {
@@ -84,7 +62,7 @@ export class DictionaryService {
         const idPattern: RegExp = new RegExp(`^[${word}:0-9]+$`);
 
         // if definitions are not of the exact search word, do not process them
-        if (!idPattern.test(meta.id)) {
+        if (!(idPattern.test(meta.id) || word.trim() == meta.id)) {
             return undefined;
         }
 
@@ -93,11 +71,15 @@ export class DictionaryService {
             this.extract_def
         );
 
+        console.log("audio: ", hwi?.prs?.[0]?.sound?.audio);
+
         // extract meta id, audio file name, and functional label
         const result: DictionaryResponse = {
             id: meta.id,
             word: word,
-            audio: hwi?.prs?.[0]?.sound?.audio || "",
+            audio: hwi?.prs?.[0]?.sound?.audio
+                ? create_audio_url(hwi?.prs?.[0]?.sound?.audio)
+                : "",
             func_label: fl || "",
             meaning: definitionArray,
         };
@@ -105,7 +87,7 @@ export class DictionaryService {
         return result;
     }
 
-    extract_def(sseq: any): WordDef {
+    private extract_def(sseq: any): WordDef {
         const definitionObj: WordDef = {
             definition: sseq?.[0]?.[1]?.dt?.[0]?.[1] || "",
             examples:
