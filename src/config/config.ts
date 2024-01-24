@@ -16,6 +16,8 @@ class Config {
     public DICTIONARY_API_URL: string =
         process.env.DICTIONARY_API_URL ||
         "https://dictionaryapi.com/api/v3/references/collegiate/json/";
+    public DICTIONARY_AUDIO_URL: string =
+        process.env.DICTIONARY_AUDIO_URL || "https://media.merriam-webster.com";
     public DICTIONARY_API_KEY: string;
 
     constructor() {
