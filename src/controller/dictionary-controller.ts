@@ -27,22 +27,19 @@ class DictionaryController implements BaseRouter {
         res: Response,
         next: NextFunction
     ) => {
-        const search_param = {
-            word: req.query.word as string,
-        };
-
+        const requested_word: string = req.query.word as string;
+        console.log(requested_word);
         library_validation.search_schema
-            .validateAsync(search_param)
-            .then((validated) => {
-                const search: WordSearchParams = new WordSearchParams(
-                    validated
-                );
+            .validateAsync(requested_word)
+            .then((validated_word) => {
+                console.log(validated_word);
+                res.setHeader;
                 this.dictionaryService
-                    .search_word(search)
+                    .search_word(validated_word)
                     .then((dict) => {
                         log_service.log(
                             LogStatus.Success,
-                            `search word: ${validated}`
+                            `search word: ${validated_word}`
                         );
                         return res.json(
                             new ResponseSuccess("ok", { dict: dict })
@@ -51,7 +48,7 @@ class DictionaryController implements BaseRouter {
                     .catch((err) => {
                         log_service.log(
                             LogStatus.Error,
-                            `search word: ${validated}`
+                            `search word: ${validated_word}`
                         );
                         next(err);
                     });
@@ -59,7 +56,7 @@ class DictionaryController implements BaseRouter {
             .catch((err) => {
                 log_service.log(
                     LogStatus.Error,
-                    `search word: ${search_param}`
+                    `search word: ${requested_word}`
                 );
                 const exc: Exception = new ValidationExc(err);
                 next(exc);

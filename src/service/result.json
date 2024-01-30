@@ -1,0 +1,802 @@
+[
+    {
+        "meta": {
+            "id": "influence:1",
+            "uuid": "7a37eefc-8970-4d02-bc26-57cafcc90a3a",
+            "sort": "091516000",
+            "src": "collegiate",
+            "section": "alpha",
+            "stems": ["influence", "influences", "under the influence"],
+            "offensive": false
+        },
+        "hom": 1,
+        "hwi": {
+            "hw": "in*flu*ence",
+            "prs": [
+                {
+                    "mw": "ˈin-ˌflü-ən(t)s",
+                    "sound": {
+                        "audio": "influe02",
+                        "ref": "c",
+                        "stat": "1"
+                    }
+                },
+                {
+                    "l": "especially Southern",
+                    "mw": "in-ˈflü-",
+                    "sound": {
+                        "audio": "influe01",
+                        "ref": "c",
+                        "stat": "1"
+                    }
+                }
+            ]
+        },
+        "fl": "noun",
+        "ins": [
+            {
+                "il": "plural",
+                "if": "in*flu*enc*es"
+            }
+        ],
+        "def": [
+            {
+                "sseq": [
+                    [
+                        [
+                            "sense",
+                            {
+                                "sn": "1",
+                                "dt": [
+                                    [
+                                        "text",
+                                        "{bc}the power or capacity of causing an effect in indirect or intangible ways {bc}{sx|sway||}"
+                                    ]
+                                ]
+                            }
+                        ]
+                    ],
+                    [
+                        [
+                            "sense",
+                            {
+                                "sn": "2 a",
+                                "dt": [
+                                    [
+                                        "text",
+                                        "{bc}the act or power of producing an effect without apparent exertion of force or direct exercise of command"
+                                    ]
+                                ]
+                            }
+                        ],
+                        [
+                            "sense",
+                            {
+                                "sn": "b",
+                                "dt": [
+                                    [
+                                        "text",
+                                        "{bc}corrupt interference with authority for personal gain"
+                                    ]
+                                ]
+                            }
+                        ]
+                    ],
+                    [
+                        [
+                            "sense",
+                            {
+                                "sn": "3",
+                                "dt": [
+                                    ["text", "{bc}one that exerts influence"]
+                                ]
+                            }
+                        ]
+                    ],
+                    [
+                        [
+                            "sense",
+                            {
+                                "sn": "4",
+                                "dt": [
+                                    [
+                                        "text",
+                                        "{bc}an emanation of spiritual or moral force"
+                                    ]
+                                ]
+                            }
+                        ]
+                    ],
+                    [
+                        [
+                            "sense",
+                            {
+                                "sn": "5 a",
+                                "dt": [
+                                    [
+                                        "text",
+                                        "{bc}an ethereal fluid held to flow from the stars and to affect the actions of humans"
+                                    ]
+                                ]
+                            }
+                        ],
+                        [
+                            "sense",
+                            {
+                                "sn": "b",
+                                "dt": [
+                                    [
+                                        "text",
+                                        "{bc}an emanation of occult power held to derive from stars"
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                ]
+            }
+        ],
+        "dros": [
+            {
+                "drp": "under the influence",
+                "def": [
+                    {
+                        "sseq": [
+                            [
+                                [
+                                    "sense",
+                                    {
+                                        "dt": [
+                                            [
+                                                "text",
+                                                "{bc}affected by alcohol or drug intoxication "
+                                            ],
+                                            [
+                                                "vis",
+                                                [
+                                                    {
+                                                        "t": "was arrested for driving {it}under the influence{/it}"
+                                                    }
+                                                ]
+                                            ]
+                                        ]
+                                    }
+                                ]
+                            ]
+                        ]
+                    }
+                ]
+            }
+        ],
+        "syns": [
+            {
+                "pl": "synonyms",
+                "pt": [
+                    [
+                        "text",
+                        "{sc}influence{/sc} {sc}authority{/sc} {sc}prestige{/sc} {sc}weight{/sc} {sc}credit{/sc} mean power exerted over the minds or behavior of others. {sc}influence{/sc} may apply to a force exercised and received consciously or unconsciously. "
+                    ],
+                    [
+                        "vis",
+                        [
+                            {
+                                "t": "used her {it}influence{/it} to get the bill passed"
+                            }
+                        ]
+                    ],
+                    [
+                        "text",
+                        " {sc}authority{/sc} implies the power of winning devotion or allegiance or of compelling acceptance and belief. "
+                    ],
+                    [
+                        "vis",
+                        [
+                            {
+                                "t": "his opinions lacked {it}authority{/it}"
+                            }
+                        ]
+                    ],
+                    [
+                        "text",
+                        " {sc}prestige{/sc} implies the ascendancy given by conspicuous excellence or reputation for superiority. "
+                    ],
+                    [
+                        "vis",
+                        [
+                            {
+                                "t": "the {it}prestige{/it} of the newspaper"
+                            }
+                        ]
+                    ],
+                    [
+                        "text",
+                        " {sc}weight{/sc} implies measurable or decisive influence in determining acts or choices. "
+                    ],
+                    [
+                        "vis",
+                        [
+                            {
+                                "t": "their wishes obviously carried much {it}weight{/it}"
+                            }
+                        ]
+                    ],
+                    [
+                        "text",
+                        " {sc}credit{/sc} suggests influence that arises from the confidence of others. "
+                    ],
+                    [
+                        "vis",
+                        [
+                            {
+                                "t": "his {it}credit{/it} with the press"
+                            }
+                        ]
+                    ]
+                ]
+            }
+        ],
+        "et": [
+            [
+                "text",
+                "Middle English, from Old French, from Medieval Latin {it}influentia{/it}, from Latin {it}influent-, influens{/it}, present participle of {it}influere{/it} to flow in, from {it}in-{/it} + {it}fluere{/it} to flow {ma}{mat|fluid|}{/ma}"
+            ]
+        ],
+        "date": "14th century{ds||5|a|}",
+        "shortdef": [
+            "the power or capacity of causing an effect in indirect or intangible ways : sway",
+            "the act or power of producing an effect without apparent exertion of force or direct exercise of command",
+            "corrupt interference with authority for personal gain"
+        ]
+    },
+    {
+        "meta": {
+            "id": "influence:2",
+            "uuid": "0f915f4a-9c0b-4242-94ef-c0dad8f36830",
+            "sort": "091517000",
+            "src": "collegiate",
+            "section": "alpha",
+            "stems": [
+                "influence",
+                "influenceable",
+                "influenced",
+                "influences",
+                "influencing"
+            ],
+            "offensive": false
+        },
+        "hom": 2,
+        "hwi": {
+            "hw": "influence"
+        },
+        "fl": "verb",
+        "ins": [
+            {
+                "ifc": "-enced",
+                "if": "in*flu*enced"
+            },
+            {
+                "ifc": "-enc*ing",
+                "if": "in*flu*enc*ing"
+            }
+        ],
+        "def": [
+            {
+                "vd": "transitive verb",
+                "sseq": [
+                    [
+                        [
+                            "sense",
+                            {
+                                "sn": "1",
+                                "dt": [
+                                    [
+                                        "text",
+                                        "{bc}to affect or alter by indirect or intangible means "
+                                    ],
+                                    [
+                                        "vis",
+                                        [
+                                            {
+                                                "t": "She attempted to {wi}influence{/wi} his decision."
+                                            },
+                                            {
+                                                "t": "greatly {wi}influenced{/wi} by my parents"
+                                            }
+                                        ]
+                                    ]
+                                ]
+                            }
+                        ]
+                    ],
+                    [
+                        [
+                            "sense",
+                            {
+                                "sn": "2",
+                                "dt": [
+                                    [
+                                        "text",
+                                        "{bc}to have an effect on the condition or development of "
+                                    ],
+                                    [
+                                        "vis",
+                                        [
+                                            {
+                                                "t": "Productivity was {wi}influenced{/wi} by worker satisfaction."
+                                            }
+                                        ]
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                ]
+            }
+        ],
+        "uros": [
+            {
+                "ure": "in*flu*ence*able",
+                "prs": [
+                    {
+                        "mw": "ˈin-ˌflü-ən(t)-sə-bəl",
+                        "sound": {
+                            "audio": "influe03",
+                            "ref": "c",
+                            "stat": "1"
+                        }
+                    }
+                ],
+                "fl": "adjective",
+                "utxt": [
+                    [
+                        "vis",
+                        [
+                            {
+                                "t": "In the situation where performance measures are not seen as {wi}influenceable{/wi}, there is little chance of the person seeing a connection between his effort and his rewards.",
+                                "aq": {
+                                    "auth": "Lyman W. Porter et al."
+                                }
+                            }
+                        ]
+                    ]
+                ]
+            }
+        ],
+        "syns": [
+            {
+                "pl": "synonyms",
+                "pt": [
+                    [
+                        "text",
+                        "{sc}affect{/sc} {sc}influence{/sc} {sc}touch{/sc} {sc}impress{/sc} {sc}strike{/sc} {sc}sway{/sc} mean to produce or have an effect upon. {sc}affect{/sc} implies the action of a stimulus that can produce a response or reaction. "
+                    ],
+                    [
+                        "vis",
+                        [
+                            {
+                                "t": "the sight {it}affected{/it} her to tears"
+                            }
+                        ]
+                    ],
+                    [
+                        "text",
+                        " {sc}influence{/sc} implies a force that brings about a change (as in nature or behavior). "
+                    ],
+                    [
+                        "vis",
+                        [
+                            {
+                                "t": "our beliefs are {it}influenced{/it} by our upbringing"
+                            }
+                        ]
+                    ],
+                    [
+                        "text",
+                        " {sc}touch{/sc} may carry a vivid suggestion of close contact and may connote stirring, arousing, or harming. "
+                    ],
+                    [
+                        "vis",
+                        [
+                            {
+                                "t": "plants {it}touched{/it} by frost"
+                            },
+                            {
+                                "t": "his emotions were {it}touched{/it} by her distress"
+                            }
+                        ]
+                    ],
+                    [
+                        "text",
+                        " {sc}impress{/sc} stresses the depth and persistence of the effect. "
+                    ],
+                    [
+                        "vis",
+                        [
+                            {
+                                "t": "only one of the plans {it}impressed{/it} him"
+                            }
+                        ]
+                    ],
+                    [
+                        "text",
+                        " {sc}strike{/sc}, similar to but weaker than {it}impress{/it}, may convey the notion of sudden sharp perception or appreciation. "
+                    ],
+                    [
+                        "vis",
+                        [
+                            {
+                                "t": "{it}struck{/it} by the solemnity of the occasion"
+                            }
+                        ]
+                    ],
+                    [
+                        "text",
+                        " {sc}sway{/sc} implies the acting of influences that are not resisted or are irresistible, with resulting change in character or course of action. "
+                    ],
+                    [
+                        "vis",
+                        [
+                            {
+                                "t": "politicians who are {it}swayed{/it} by popular opinion"
+                            }
+                        ]
+                    ]
+                ]
+            }
+        ],
+        "date": "1658{ds||1||}",
+        "shortdef": [
+            "to affect or alter by indirect or intangible means",
+            "to have an effect on the condition or development of"
+        ]
+    },
+    {
+        "meta": {
+            "id": "sphere of influence",
+            "uuid": "8fe9d387-408b-4128-a9eb-0691c96335d2",
+            "sort": "194658700",
+            "src": "collegiate",
+            "section": "alpha",
+            "stems": ["sphere of influence", "spheres of influence"],
+            "offensive": false
+        },
+        "hwi": {
+            "hw": "sphere of influence"
+        },
+        "fl": "noun phrase",
+        "def": [
+            {
+                "sseq": [
+                    [
+                        [
+                            "sense",
+                            {
+                                "dt": [
+                                    [
+                                        "text",
+                                        "{bc}a territorial area within which the political influence or the interests of one nation are held to be more or less paramount"
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                ]
+            }
+        ],
+        "date": "1885",
+        "shortdef": [
+            "a territorial area within which the political influence or the interests of one nation are held to be more or less paramount"
+        ]
+    },
+    {
+        "meta": {
+            "id": "drive under the influence",
+            "uuid": "3b17e5d7-cb74-4078-8c94-a7345d653fe3",
+            "sort": "3005174000",
+            "src": "ld",
+            "section": "idioms",
+            "stems": ["drive under the influence"],
+            "offensive": false
+        },
+        "hwi": {
+            "hw": "drive under the influence"
+        },
+        "fl": "idiom",
+        "def": [
+            {
+                "sls": ["US"],
+                "sseq": [
+                    [
+                        [
+                            "sense",
+                            {
+                                "dt": [
+                                    ["text", "{bc}to drive while drunk "],
+                                    [
+                                        "vis",
+                                        [
+                                            {
+                                                "t": "He was arrested for {it}driving under the influence{/it}."
+                                            }
+                                        ]
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                ]
+            }
+        ],
+        "shortdef": ["to drive while drunk"]
+    },
+    {
+        "meta": {
+            "id": "under the influence of",
+            "uuid": "b2675359-a39f-4110-b1a2-356fa087d966",
+            "sort": "3021793000",
+            "src": "ld",
+            "section": "idioms",
+            "stems": ["under the influence of"],
+            "offensive": false
+        },
+        "hwi": {
+            "hw": "under the influence of"
+        },
+        "fl": "idiom",
+        "def": [
+            {
+                "sseq": [
+                    [
+                        [
+                            "sense",
+                            {
+                                "dt": [
+                                    ["text", "{bc}being affected by "],
+                                    [
+                                        "vis",
+                                        [
+                                            {
+                                                "t": "She was {it}under the influence of{/it} drugs."
+                                            },
+                                            {
+                                                "t": "The satellite came {it}under the influence of{/it} the planet's gravitational pull."
+                                            },
+                                            {
+                                                "t": "{it}under the influence of{/it} a foreign government"
+                                            }
+                                        ]
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                ]
+            }
+        ],
+        "shortdef": ["being affected by"]
+    },
+    {
+        "meta": {
+            "id": "counterinfluence",
+            "uuid": "f856788d-85c3-4453-82cf-7c3cb5092016",
+            "sort": "035652266",
+            "src": "collegiate",
+            "section": "alpha",
+            "stems": [
+                "counter-influence",
+                "counter-influences",
+                "counterinfluence",
+                "counterinfluences"
+            ],
+            "offensive": false
+        },
+        "hwi": {
+            "hw": "coun*ter*in*flu*ence",
+            "prs": [
+                {
+                    "mw": "ˌkau̇n-tər-ˈin-ˌflü-ən(t)s",
+                    "sound": {
+                        "audio": "counterinfluenc_1",
+                        "ref": "owl",
+                        "stat": "1"
+                    }
+                },
+                {
+                    "l": "especially Southern",
+                    "mw": "-in-ˈflü-"
+                }
+            ]
+        },
+        "vrs": [
+            {
+                "vl": "or",
+                "va": "coun*ter-in*flu*ence"
+            }
+        ],
+        "fl": "noun",
+        "ins": [
+            {
+                "il": "plural",
+                "if": "coun*ter*in*flu*enc*es"
+            },
+            {
+                "il": "or",
+                "if": "coun*ter-in*flu*enc*es"
+            }
+        ],
+        "def": [
+            {
+                "sseq": [
+                    [
+                        [
+                            "sense",
+                            {
+                                "dt": [
+                                    [
+                                        "text",
+                                        "{bc}an {d_link|influence|influence:1} that opposes or counteracts another influence "
+                                    ],
+                                    [
+                                        "vis",
+                                        [
+                                            {
+                                                "t": "… conscious of the capacities for evil which lie dormant in us all, and striving earnestly to open her heart to the {wi}counter-influence{/wi} of her own better nature …",
+                                                "aq": {
+                                                    "auth": "Wilkie Collins"
+                                                }
+                                            }
+                                        ]
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                ]
+            }
+        ],
+        "date": "1820",
+        "shortdef": [
+            "an influence that opposes or counteracts another influence"
+        ]
+    },
+    {
+        "meta": {
+            "id": "interinfluence",
+            "uuid": "be9cc523-36d5-465d-a80a-f66af1bda520",
+            "sort": "092218000",
+            "src": "collegiate",
+            "section": "alpha",
+            "stems": [
+                "inter-influence",
+                "inter-influences",
+                "interinfluence",
+                "interinfluences"
+            ],
+            "offensive": false
+        },
+        "hwi": {
+            "hw": "in*ter*in*flu*ence",
+            "prs": [
+                {
+                    "mw": "ˌin-tər-ˈin-ˌflü-ən(t)s",
+                    "sound": {
+                        "audio": "interinfluence_1",
+                        "ref": "owl",
+                        "stat": "1"
+                    }
+                },
+                {
+                    "l": "especially Southern",
+                    "mw": "-in-ˈflü-"
+                }
+            ]
+        },
+        "fl": "noun",
+        "ins": [
+            {
+                "il": "plural",
+                "if": "in*ter*in*flu*enc*es"
+            },
+            {
+                "il": "or",
+                "if": "in*ter-in*flu*enc*es"
+            }
+        ],
+        "def": [
+            {
+                "sseq": [
+                    [
+                        [
+                            "sense",
+                            {
+                                "dt": [
+                                    [
+                                        "text",
+                                        "{bc}reciprocal {d_link|influence|influence:1} "
+                                    ],
+                                    [
+                                        "vis",
+                                        [
+                                            {
+                                                "t": "The teachers and girls often came from many different parts of the country, creating opportunities for {wi}interinfluence.{/wi}",
+                                                "aq": {
+                                                    "auth": "Lisa Gilman"
+                                                }
+                                            },
+                                            {
+                                                "t": "the {wi}interinfluence{/wi} between science and philosophy"
+                                            }
+                                        ]
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                ]
+            }
+        ],
+        "date": "1856",
+        "shortdef": ["reciprocal influence"]
+    },
+    {
+        "meta": {
+            "id": "put/throw one's weight/influence behind",
+            "uuid": "8086c4f0-4a7e-4a7a-b284-36f85f00d136",
+            "sort": "3015732000",
+            "src": "ld",
+            "section": "idioms",
+            "stems": [
+                "put her influence behind",
+                "put her weight behind",
+                "put his influence behind",
+                "put his weight behind",
+                "put one's influence behind",
+                "put one's weight behind",
+                "put their influence behind",
+                "put their weight behind",
+                "put/throw one's weight/influence behind",
+                "throw her influence behind",
+                "throw her weight behind",
+                "throw his influence behind",
+                "throw his weight behind",
+                "throw one's influence behind",
+                "throw one's weight behind",
+                "throw their influence behind",
+                "throw their weight behind"
+            ],
+            "offensive": false
+        },
+        "hwi": {
+            "hw": "put/throw one's weight/influence behind"
+        },
+        "fl": "idiom",
+        "def": [
+            {
+                "sseq": [
+                    [
+                        [
+                            "sense",
+                            {
+                                "dt": [
+                                    [
+                                        "text",
+                                        "{bc}to use one's influence to support (something) "
+                                    ],
+                                    [
+                                        "vis",
+                                        [
+                                            {
+                                                "t": "Lobbyists are {it}throwing their weight/influence behind{/it} the legislation."
+                                            }
+                                        ]
+                                    ]
+                                ]
+                            }
+                        ]
+                    ]
+                ]
+            }
+        ],
+        "shortdef": ["to use one's influence to support (something)"]
+    }
+]
