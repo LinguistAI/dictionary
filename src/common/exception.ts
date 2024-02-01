@@ -49,19 +49,25 @@ export class UnauthExc extends Exception {
 }
 
 export class AxiosExc extends Exception {
-    constructor(error?: any) {
+    constructor(error?: any, data?: any) {
         let err: string = error || "Parameters are incorrect";
-        super(StatusCodes.BAD_REQUEST, "Unsuccessful fetch", err);
+        super(
+            StatusCodes.BAD_REQUEST,
+            "Unsuccessful fetch",
+            err,
+            (data = data)
+        );
     }
 }
 
 export class WordNotFoundExc extends Exception {
-    constructor(error?: any) {
+    constructor(error?: any, data?: any) {
         let err: string = error || "Word not found";
         super(
             StatusCodes.NOT_FOUND,
             "The word you are looking for does not exist!",
-            err
+            err,
+            (data = data)
         );
     }
 }

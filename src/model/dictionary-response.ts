@@ -1,12 +1,5 @@
-export interface DictionaryResponse {
-    id: string; // api response -> meta -> id
-    word: string;
-    audio: string; // 2.6 PRONUNCIATIONS: PRS in documentation
-    func_label: string; // verb, noun, adjective, etc.
-    meaning: WordDef[];
-}
+import { DictionaryWordGroup } from "./dictionary-word-group";
 
-export interface WordDef {
-    definition: string;
-    examples?: string[];
+export interface DictionaryResponse {
+    [id: string]: { wordGroup: DictionaryWordGroup[] }; // api response -> meta -> id
 }
