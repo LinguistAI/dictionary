@@ -1,10 +1,9 @@
 import Joi from "joi";
 
-const word_validation = {
-    search_schema: Joi.string()
-        .min(1)
-        .pattern(new RegExp("^[a-zA-Z0-9-']+$"))
+const wordValidation = {
+    searchSchema: Joi.array()
+        .items(Joi.string().min(1).pattern(new RegExp("^[a-zA-Z0-9-']+$")))
         .options({ abortEarly: false }),
 };
 
-export default word_validation;
+export default wordValidation;

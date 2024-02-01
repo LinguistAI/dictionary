@@ -5,53 +5,78 @@ import axios from "axios";
 import { create_audio_url } from "../utils/audio-file-utils";
 
 export class DictionaryService {
-    search_word(
-        word: string
-    ): Promise<DictionaryResponse | DictionaryResponse[]> {
-        return new Promise<DictionaryResponse | DictionaryResponse[]>(
-            (resolve, reject) => {
-                const axios_config = {
-                    method: "get",
-                    url: config.DICTIONARY_API_URL + word,
-                    params: {
-                        key: config.DICTIONARY_API_KEY,
-                        format: "json",
-                        jscmd: "data",
-                    },
-                };
+    search_word(wordList: string[]): Promise<DictionaryResponse[]> {
+        const promises = wordList.map((word: string) => {
+            return new Promise<DictionaryResponse | DictionaryResponse[]>(
+                (resolve, reject) => {
+                    const axios_config = {
+                        method: "get",
+                        url: config.DICTIONARY_API_URL + word,
+                        params: {
+                            key: config.DICTIONARY_API_KEY,
+                            format: "json",
+                            jscmd: "data",
+                        },
+                    };
 
-                axios(axios_config)
-                    .then((res) => {
-                        if (res.status != 200) {
-                            reject(new AxiosExc());
-                        } else if (Object.keys(res.data).length === 0) {
-                            reject(new WordNotFoundExc());
-                        } else if (
-                            Array.isArray(res.data) &&
-                            !res.data.every((item) => typeof item === "object")
-                        ) {
-                            reject(new WordNotFoundExc(res.data));
-                        } else {
-                            const dict_response = JSON.parse(
-                                JSON.stringify(res.data)
-                            );
-                            const results: DictionaryResponse[] = dict_response
-                                .map((entry: any) =>
-                                    this.extract_dict_data(word, entry)
+                    axios(axios_config)
+                        .then((res) => {
+                            if (res.status != 200) {
+                                reject(new AxiosExc());
+                            } else if (Object.keys(res.data).length === 0) {
+                                reject(new WordNotFoundExc());
+                            } else if (
+                                Array.isArray(res.data) &&
+                                !res.data.every(
+                                    (item) => typeof item === "object"
                                 )
-                                .filter(
-                                    (result: DictionaryResponse | null) =>
-                                        result != null
+                            ) {
+                                reject(new WordNotFoundExc(res.data));
+                            } else {
+                                const dict_response = JSON.parse(
+                                    JSON.stringify(res.data)
                                 );
-                            resolve(results);
-                        }
-                    })
-                    .catch((err) => {
-                        console.log(err);
-                        reject(err);
-                    });
-            }
-        );
+                                const results: DictionaryResponse[] =
+                                    dict_response
+                                        .map((entry: any) =>
+                                            this.extract_dict_data(word, entry)
+                                        )
+                                        .filter(
+                                            (
+                                                result: DictionaryResponse | null
+                                            ) => result != null
+                                        );
+                                resolve(results);
+                            }
+                        })
+                        .catch((err) => {
+                            console.log(err);
+                            reject(err);
+                        });
+                }
+            );
+        });
+
+        return Promise.all(promises);
+    }
+
+    public search_word_list(
+        wordList: string[]
+    ): Promise<DictionaryResponse | DictionaryResponse[]> {
+        const promises: Promise<DictionaryResponse | DictionaryResponse[]>[] =
+            wordList.map((word: string) => {
+                return this.search_word(word);
+            });
+
+        await Promise.all(promises)
+            .then((results: (DictionaryResponse | DictionaryResponse[])[]) => {
+                // Handle results here
+                console.log(results);
+            })
+            .catch((error: any) => {
+                // Handle errors
+                console.error(error);
+            });
     }
 
     private extract_dict_data(
