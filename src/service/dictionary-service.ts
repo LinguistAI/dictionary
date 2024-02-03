@@ -74,25 +74,6 @@ export class DictionaryService {
         });
     }
 
-    // public search_word_list(
-    //     wordList: string[]
-    // ): Promise<DictionaryResponse | DictionaryResponse[]> {
-    //     const promises: Promise<DictionaryResponse | DictionaryResponse[]>[] =
-    //         wordList.map((word: string) => {
-    //             return this.search_word(word);
-    //         });
-
-    //     await Promise.all(promises)
-    //         .then((results: (DictionaryResponse | DictionaryResponse[])[]) => {
-    //             // Handle results here
-    //             console.log(results);
-    //         })
-    //         .catch((error: any) => {
-    //             // Handle errors
-    //             console.error(error);
-    //         });
-    // }
-
     private extract_dict_data(
         word: string,
         jsonEntry: any
@@ -119,6 +100,7 @@ export class DictionaryService {
             audio: hwi?.prs?.[0]?.sound?.audio
                 ? create_audio_url(hwi?.prs?.[0]?.sound?.audio)
                 : "",
+            phonetic: hwi?.prs?.[0]?.mw || "",
             func_label: fl || "",
             meaning: definitionArray,
         };
