@@ -1,4 +1,4 @@
-import { AxiosExc, WordNotFoundExc } from "../common/exception";
+import { APIRequestExc, WordNotFoundExc } from "../common/exception";
 import config from "../config/config";
 import axios from "axios";
 import { create_audio_url } from "../utils/audio-file-utils";
@@ -21,21 +21,26 @@ export class DictionaryService {
 
                 axios(axios_config)
                     .then((res) => {
-                        if (res.status != 200) {
-                            reject(new AxiosExc((data = { word: word })));
-                        } else if (Object.keys(res.data).length === 0) {
-                            reject(
-                                new WordNotFoundExc((data = { word: word }))
-                            );
+                        if (res.status != 200 || typeof res.data === "string") {
+                            reject(new APIRequestExc(res.data));
                         } else if (
-                            Array.isArray(res.data) &&
-                            !res.data.every((item) => typeof item === "object")
+                            Object.keys(res.data).length === 0 ||
+                            (Array.isArray(res.data) &&
+                                !res.data.every(
+                                    (item) => typeof item === "object"
+                                ))
                         ) {
-                            reject(new WordNotFoundExc(res.data));
+                            const result: DictionaryResponse = {
+                                [word]: {},
+                            };
+                            resolve(result);
                         } else {
+                            console.log("status: ", res.status);
+                            console.log("data: ", res.data);
                             const dict_response = JSON.parse(
                                 JSON.stringify(res.data)
                             );
+                            console.log("data: ", res.data);
                             const wordGroup: DictionaryWordGroup[] =
                                 dict_response
                                     .map((entry: any) =>
@@ -60,52 +65,13 @@ export class DictionaryService {
             });
         });
 
-        // return Promise.all(promises).then((data) => {
-        //     return data.reduce((wordObj: Record<string, any>, item: any) => {
-        //         const key = Object.keys(item)[0];
-        //         wordObj[key] = item[key];
-        //         return wordObj;
-        //     }, {});
-        // });
-
-        return (
-            Promise.all(
-                promises.map(async (promise: Promise<DictionaryResponse>) => {
-                    try {
-                        const data = await promise;
-                        return data;
-                    } catch (error) {
-                        console.log(error); // update this with a nice error log
-                        return {};
-                    }
-                })
-            )
-                // then((data) => {
-                //     return data.reduce(
-                //         (acc: Record<string, any>, item: any, index: number) => {
-                //             const word = wordList[index];
-                //             acc[word] = item;
-                //             return acc;
-                //         },
-                //         {}
-                //     );
-                // });
-                .then((data) => {
-                    return data.reduce(
-                        (wordObj: Record<string, any>, item: any) => {
-                            console.log(item);
-                            const key = Object.keys(item)[0];
-                            if (item[key] == null) {
-                                wordObj[key] = {};
-                            } else {
-                                wordObj[key] = item[key];
-                            }
-                            return wordObj;
-                        },
-                        {}
-                    );
-                })
-        );
+        return Promise.all(promises).then((data) => {
+            return data.reduce((wordObj: Record<string, any>, item: any) => {
+                const key = Object.keys(item)[0];
+                wordObj[key] = item[key];
+                return wordObj;
+            }, {});
+        });
     }
 
     // public search_word_list(
