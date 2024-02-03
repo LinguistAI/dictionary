@@ -5,7 +5,7 @@ import { WordSearchParams } from "../common/search-word-params";
 import { LogStatus } from "../enums/log-status";
 import { DictionaryService } from "../service/dictionary-service";
 import log_service from "../service/log-service";
-import library_validation from "../validation/library-validation";
+import wordValidation from "../validation/library-validation";
 import BaseRouter from "./base-router";
 
 class DictionaryController implements BaseRouter {
@@ -19,7 +19,7 @@ class DictionaryController implements BaseRouter {
     }
 
     init_controller() {
-        this.router.get("/", this.search_word);
+        this.router.post("/", this.search_word);
     }
 
     private search_word = async (
@@ -27,19 +27,18 @@ class DictionaryController implements BaseRouter {
         res: Response,
         next: NextFunction
     ) => {
-        const requested_word: string = req.query.word as string;
-        console.log(requested_word);
-        library_validation.search_schema
-            .validateAsync(requested_word)
-            .then((validated_word) => {
-                console.log(validated_word);
-                res.setHeader;
+        const wordList = req.body.wordList;
+
+        wordValidation.searchSchema
+            .validateAsync(wordList)
+            .then((validated) => {
+                console.log(validated);
                 this.dictionaryService
-                    .search_word(validated_word)
+                    .search_word(validated)
                     .then((dict) => {
                         log_service.log(
                             LogStatus.Success,
-                            `search word: ${validated_word}`
+                            `search word: ${validated}`
                         );
                         return res.json(
                             new ResponseSuccess("ok", { dict: dict })
@@ -48,16 +47,13 @@ class DictionaryController implements BaseRouter {
                     .catch((err) => {
                         log_service.log(
                             LogStatus.Error,
-                            `search word: ${validated_word}`
+                            `search word: ${validated}`
                         );
                         next(err);
                     });
             })
             .catch((err) => {
-                log_service.log(
-                    LogStatus.Error,
-                    `search word: ${requested_word}`
-                );
+                log_service.log(LogStatus.Error, `search words: ${wordList}`);
                 const exc: Exception = new ValidationExc(err);
                 next(exc);
             });

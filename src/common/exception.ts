@@ -48,10 +48,14 @@ export class UnauthExc extends Exception {
     }
 }
 
-export class AxiosExc extends Exception {
+export class APIRequestExc extends Exception {
     constructor(error?: any) {
         let err: string = error || "Parameters are incorrect";
-        super(StatusCodes.BAD_REQUEST, "Unsuccessful fetch", err);
+        super(
+            StatusCodes.INTERNAL_SERVER_ERROR,
+            "Request to external service is not successful",
+            err
+        );
     }
 }
 
