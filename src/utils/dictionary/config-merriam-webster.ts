@@ -12,9 +12,9 @@ export const MarriemWebsterConfig: APIConfig = {
     axiosConfig: (word: string) => {
         return {
             method: "get",
-            url: config.DICTIONARY_API_URL + word,
+            url: config.MW_DICTIONARY_API_URL + word,
             params: {
-                key: config.DICTIONARY_API_KEY,
+                key: config.MW_DICTIONARY_API_KEY,
                 format: "json",
                 jscmd: "data",
             },
@@ -51,11 +51,17 @@ function handleEdgeCases(res: any, word: string): DictionaryResponse | null {
     return null;
 }
 
-function extractDictData(
+function extractDictData(word: string, jsonData: any): DictionaryWordGroup[] {
+    return jsonData
+        .map((entry: any) => extractDictDataEntry(word, entry))
+        .filter((result: DictionaryWordGroup | null) => result != null);
+}
+
+function extractDictDataEntry(
     word: string,
-    jsonEntry: any
+    jsonData: any
 ): DictionaryWordGroup | undefined {
-    const { meta, def, hwi, fl } = jsonEntry;
+    const { meta, def, hwi, fl } = jsonData;
     const idPattern: RegExp = new RegExp(`^[${word}:0-9]+$`);
 
     // if definitions are not of the exact search word, do not process them

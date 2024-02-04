@@ -12,21 +12,26 @@ class Config {
     public PORT: number = parseInt(process.env.PORT as string, 10) || 4000;
     public STAT: string = process.env.NODE_ENV || "development";
 
-    // api configs
-    public DICTIONARY_API_URL: string =
+    // marriem webster api configs
+    public MW_DICTIONARY_API_URL: string =
         process.env.DICTIONARY_API_URL ||
         "https://dictionaryapi.com/api/v3/references/collegiate/json/";
     public DICTIONARY_AUDIO_URL: string =
         process.env.DICTIONARY_AUDIO_URL || "https://media.merriam-webster.com";
-    public DICTIONARY_API_KEY: string;
+    public MW_DICTIONARY_API_KEY: string;
+
+    // free dictionary configs
+    public FREE_DICTIONARY_API_URL: string =
+        process.env.FREE_DICTIONARY_API_URL ||
+        "https://api.dictionaryapi.dev/api/v2/entries/en/";
 
     constructor() {
-        if (process.env.DICTIONARY_API_KEY == undefined) {
+        if (process.env.MW_DICTIONARY_API_KEY == undefined) {
             throw new ConfigNotLoadedExc(
                 "Dictionary API KEY is not found in the environment."
             );
         } else {
-            this.DICTIONARY_API_KEY = process.env.DICTIONARY_API_KEY;
+            this.MW_DICTIONARY_API_KEY = process.env.MW_DICTIONARY_API_KEY;
         }
         console.log("configs are loaded");
     }

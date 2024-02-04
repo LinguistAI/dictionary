@@ -6,6 +6,7 @@ import { DictionaryWordGroup, WordDef } from "../model/dictionary-word-group";
 import { create_audio_url } from "../utils/dictionary/audio-file-utils";
 import { APIConfig } from "../utils/dictionary/api-config";
 import { MarriemWebsterConfig } from "../utils/dictionary/config-merriam-webster";
+import { FreeDictConfig } from "../utils/dictionary/config-free-dict";
 
 export class DictionaryService {
     search_word(wordList: string[]): Promise<any> {
@@ -22,18 +23,11 @@ export class DictionaryService {
                         if (edgeCaseResult) {
                             resolve(edgeCaseResult);
                         } else {
-                            const dict_response = JSON.parse(
+                            const dictResponse = JSON.parse(
                                 JSON.stringify(res.data)
                             );
                             const wordGroup: DictionaryWordGroup[] =
-                                dict_response
-                                    .map((entry: any) =>
-                                        apiConfig.extractDictData(word, entry)
-                                    )
-                                    .filter(
-                                        (result: DictionaryWordGroup | null) =>
-                                            result != null
-                                    );
+                                apiConfig.extractDictData(word, dictResponse);
 
                             const result: DictionaryResponse = {
                                 [word]: { wordGroup },
@@ -62,7 +56,7 @@ export class DictionaryService {
     private select_api(): APIConfig {
         let selectedAPI: APIConfig;
 
-        selectedAPI = MarriemWebsterConfig;
+        selectedAPI = FreeDictConfig;
         return selectedAPI;
     }
 }
