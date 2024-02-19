@@ -14,10 +14,11 @@ class Config {
 
     // marriem webster api configs
     public MW_DICTIONARY_API_URL: string =
-        process.env.DICTIONARY_API_URL ||
+        process.env.MW_DICTIONARY_API_URL ||
         "https://dictionaryapi.com/api/v3/references/collegiate/json/";
     public DICTIONARY_AUDIO_URL: string =
-        process.env.DICTIONARY_AUDIO_URL || "https://media.merriam-webster.com";
+        process.env.MW_DICTIONARY_AUDIO_URL ||
+        "https://media.merriam-webster.com";
     public MW_DICTIONARY_API_KEY: string;
 
     // free dictionary configs
