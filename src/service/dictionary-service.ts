@@ -56,7 +56,7 @@ export class DictionaryService {
     private select_api(): APIConfig {
         let selectedAPI: APIConfig;
 
-        selectedAPI = FreeDictConfig;
+        selectedAPI = MarriemWebsterConfig;
         return selectedAPI;
     }
 }

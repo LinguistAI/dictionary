@@ -51,7 +51,6 @@ function extractDictData(word: string, jsonData: any): DictionaryWordGroup[] {
     let id: number = 0; // Initialize the ID
     return jsonData
         .flatMap((entry: any) => {
-            console.log("entry: ", entry);
             const result = extractDictDataEntry(word, entry, id);
             id = result?.id ? result.id : id;
             return result!.data;
@@ -76,7 +75,6 @@ function extractDictDataEntry(
 
     let dictGroup: DictionaryWordGroup[] = meanings.map((meaning: any) => {
         {
-            console.log("id", id);
             const result = extractDictDataMeaningEntry(
                 meaning,
                 id,
@@ -92,7 +90,6 @@ function extractDictDataEntry(
     if (dictGroup.length == 0) {
         return undefined;
     }
-    console.log("data", dictGroup);
 
     return { data: dictGroup, id: id };
 }
@@ -118,8 +115,6 @@ function extractDictDataMeaningEntry(
         meaning: definitionArray,
     };
 
-    console.log("id: ", id);
-    console.log("result: ", result);
     return result;
 }
 
