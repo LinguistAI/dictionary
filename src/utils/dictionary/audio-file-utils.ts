@@ -1,4 +1,4 @@
-import config from "../config/config";
+import config from "../../config/config";
 
 const SUBDIR_BIX: string = "bix";
 const SUBDIR_GG: string = "gg";

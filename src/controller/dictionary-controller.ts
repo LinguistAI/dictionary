@@ -32,7 +32,6 @@ class DictionaryController implements BaseRouter {
         wordValidation.searchSchema
             .validateAsync(wordList)
             .then((validated) => {
-                console.log(validated);
                 this.dictionaryService
                     .search_word(validated)
                     .then((dict) => {
