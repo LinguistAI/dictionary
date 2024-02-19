@@ -2,15 +2,15 @@ import dotenv from "dotenv";
 import { ConfigNotLoadedExc } from "../common/exception";
 
 if (process.env.NODE_ENV === "test") {
-  dotenv.config({ path: ".env.test" });
+    dotenv.config({ path: ".env.test" });
 } else {
-  dotenv.config();
+    dotenv.config();
 }
 
 class Config {
-  // app port and status
-  public PORT: number = parseInt(process.env.PORT as string, 10) || 4000;
-  public STAT: string = process.env.NODE_ENV || "development";
+    // app port and status
+    public PORT: number = parseInt(process.env.PORT as string, 10) || 4000;
+    public STAT: string = process.env.NODE_ENV || "development";
 
     // marriem webster api configs
     public MW_DICTIONARY_API_URL: string =
@@ -25,6 +25,8 @@ class Config {
         process.env.FREE_DICTIONARY_API_URL ||
         "https://api.dictionaryapi.dev/api/v2/entries/en/";
 
+    public BASE_PREFIX: string = process.env.BASE_PREFIX || "/api/v1";
+
     constructor() {
         if (process.env.MW_DICTIONARY_API_KEY == undefined) {
             throw new ConfigNotLoadedExc(
@@ -35,7 +37,6 @@ class Config {
         }
         console.log("configs are loaded");
     }
-  }
 }
 
 const config = new Config();
