@@ -1,5 +1,6 @@
 export interface ErrorResponse {
     error: string;
-    message: string;
+    msg: string;
     timestamp: string;
+    status: number;
 }

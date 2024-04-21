@@ -70,8 +70,9 @@ function extractDictDataEntry(
         return undefined;
     }
 
-    const groupAudio: string =
-        phonetics.find((obj: any) => obj.audio && obj.audio != "").audio ?? "";
+    const groupAudio: string = phonetics.length > 0 
+    ? phonetics.find((obj: any) => obj.audio && obj.audio !== "")?.audio ?? "" 
+    : "";
 
     let dictGroup: DictionaryWordGroup[] = meanings.map((meaning: any) => {
         {
