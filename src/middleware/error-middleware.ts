@@ -9,13 +9,13 @@ function error_middleware(
     res: Response,
     next: NextFunction
 ) {
+    const status: number = error.status || 500;
     const err_res: ErrorResponse = {
         error: error.validation_error || error.error || "error",
-        message: error.message || "something went wrong",
+        msg: error.message || "something went wrong",
         timestamp: moment().tz("Europe/Istanbul").format(),
+        status: status 
     };
-
-    const status: number = error.status || 500;
 
     res.status(status).send(err_res);
 }

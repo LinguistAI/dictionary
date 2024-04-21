@@ -36,7 +36,7 @@ class DictionaryController implements BaseRouter {
           .search_word(validated)
           .then((dict) => {
             log_service.log(LogStatus.Success, `search word: ${validated}`);
-            return res.json(new ResponseSuccess("ok", { dict: dict }));
+            return res.json(new ResponseSuccess("OK", 200, { dict: dict }));
           })
           .catch((err) => {
             log_service.log(LogStatus.Error, `search word: ${validated}`);
@@ -51,7 +51,7 @@ class DictionaryController implements BaseRouter {
   };
 
   private ping = (res: Response) => {
-    res.json(new ResponseSuccess("ok", { message: "Server is up" }));
+    res.json(new ResponseSuccess("OK", 200, { message: "Server is up" }));
   };
 }
 

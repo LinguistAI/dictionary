@@ -39,7 +39,10 @@ export class DictionaryService {
                         }
                     })
                     .catch((err) => {
-                        console.log(err);
+                        if (err.response && err.response.status === 404) {
+                            err.message = "Word not found: " + lowercaseWord;
+                            err.status = 404;
+                        }
                         reject(err);
                     });
             });
