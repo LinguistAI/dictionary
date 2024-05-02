@@ -20,6 +20,8 @@ class DictionaryController implements BaseRouter {
   init_controller() {
     this.router.post("/", this.search_word);
     this.router.get("/ping", this.ping);
+    this.router.head("/ping", this.ping);
+    this.router.post("/ping", this.ping);
   }
 
   private search_word = async (
@@ -50,8 +52,10 @@ class DictionaryController implements BaseRouter {
       });
   };
 
-  private ping = (res: Response) => {
-    res.json(new ResponseSuccess("OK", 200, { message: "Server is up" }));
+  private ping = (req: Request, res: Response, next: NextFunction) => {
+    return res.json(
+      new ResponseSuccess("OK", 200, { message: "Server is up" })
+    );
   };
 }
 
