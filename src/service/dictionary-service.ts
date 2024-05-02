@@ -11,14 +11,16 @@ import { FreeDictConfig } from "../utils/dictionary/config-free-dict";
 export class DictionaryService {
     search_word(wordList: string[]): Promise<any> {
         const promises = wordList.map((word: string) => {
+            const lowercaseWord = word.toLowerCase();
+
             return new Promise<DictionaryResponse>((resolve, reject) => {
                 const apiConfig = this.select_api();
 
-                axios(apiConfig.axiosConfig(word))
+                axios(apiConfig.axiosConfig(lowercaseWord))
                     .then((res) => {
                         apiConfig.handleErrors(res);
                         const edgeCaseResult: DictionaryResponse | null =
-                            apiConfig.handleEdgeCases(res, word);
+                            apiConfig.handleEdgeCases(res, lowercaseWord);
 
                         if (edgeCaseResult) {
                             resolve(edgeCaseResult);
@@ -27,17 +29,20 @@ export class DictionaryService {
                                 JSON.stringify(res.data)
                             );
                             const wordGroup: DictionaryWordGroup[] =
-                                apiConfig.extractDictData(word, dictResponse);
+                                apiConfig.extractDictData(lowercaseWord, dictResponse);
 
                             const result: DictionaryResponse = {
-                                [word]: { wordGroup },
+                                [lowercaseWord]: { wordGroup },
                             };
 
                             resolve(result);
                         }
                     })
                     .catch((err) => {
-                        console.log(err);
+                        if (err.response && err.response.status === 404) {
+                            err.message = "Word not found: " + lowercaseWord;
+                            err.status = 404;
+                        }
                         reject(err);
                     });
             });
@@ -56,7 +61,7 @@ export class DictionaryService {
     private select_api(): APIConfig {
         let selectedAPI: APIConfig;
 
-        selectedAPI = MarriemWebsterConfig;
+        selectedAPI = FreeDictConfig;
         return selectedAPI;
     }
 }

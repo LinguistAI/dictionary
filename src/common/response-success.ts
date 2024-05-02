@@ -1,12 +1,14 @@
 import moment from "moment-timezone";
 export class ResponseSuccess {
     data?: any;
-    message: string;
+    msg: string;
     timestamp: string;
+    status: number;
 
-    constructor(msg: string, data?: any) {
+    constructor(msg: string, status: number, data?: any) {
         this.data = data;
-        this.message = msg;
+        this.msg = msg;
         this.timestamp = moment().tz("Europe/Istanbul").format();
+        this.status = status;
     }
 }

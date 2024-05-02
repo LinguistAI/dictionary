@@ -35,8 +35,15 @@ export class ValidationExc extends Exception {
         super(StatusCodes.BAD_REQUEST, "Wrong request content!", "");
 
         this.validation_error = [];
-        for (let detail of error.details) {
-            this.validation_error.push(detail.message);
+
+        // Check if error.details is iterable before attempting to iterate over it
+        if (error.details && typeof error.details[Symbol.iterator] === 'function') {
+            for (let detail of error.details) {
+                this.validation_error.push(detail.message);
+            }
+        } else {
+            // If error.details is not iterable, add a default error message
+            this.validation_error.push("Validation failed: unknown error");
         }
     }
 }
